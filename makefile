@@ -5,7 +5,7 @@ ASSIMP_INCLUDE_PATH = /home/uas/assimp-3.3.1/include
 CFLAGS = -std=c++11 -I$(VULKAN_SDK_PATH)/include -I$(STB_INCLUDE_PATH) -I$(OBJ_INCLUDE_PATH) -I$(ASSIMP_INCLUDE_PATH)
 LDFLAGS = -L$(VULKAN_SDK_PATH)/lib `pkg-config --static --libs glfw3` -lvulkan -lassimp
 VulkanTest: main.cpp
-	g++ $(CFLAGS) -g -o VulkanTest main.cpp $(LDFLAGS)
+	g++ $(CFLAGS) -o VulkanTest main.cpp $(LDFLAGS)
 .PHONY: test clean
 
 test: VulkanTest
