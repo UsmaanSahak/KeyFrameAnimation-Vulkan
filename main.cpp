@@ -29,8 +29,8 @@
 const int WIDTH = 1000;
 const int HEIGHT = 500;
 
-const std::string MODEL_PATH = "models/boxA.dae";
-const std::string TEXTURE_PATH = "textures/chalet.jpg";
+const std::string MODEL_PATH = "models/ddd.dae";
+const std::string TEXTURE_PATH = "textures/globe.jpg";
 
 const std::vector<const char*> validationLayers = {
     "VK_LAYER_LUNARG_standard_validation"
@@ -1327,12 +1327,19 @@ static auto sTime = std::chrono::high_resolution_clock::now();
               pKey = meshes[j].seconds[a-1];
               //std::cout << meshes[j].vertices[i].pos.y << " + " << meshes[j].translations[a-1].y << " = pVal.y." << std::endl;
 
-              pVal.y = meshes[j].vertices[i].pos.y + meshes[j].translations[a-1].y; //HERE IS THE PROBLEM HAH
+              pVal.x = meshes[j].vertices[i].pos.x + meshes[j].translations[a-1].x;
+              pVal.y = meshes[j].vertices[i].pos.y + meshes[j].translations[a-1].y;
+              pVal.z = meshes[j].vertices[i].pos.z + meshes[j].translations[a-1].z; 
             }
             float nKey = meshes[j].seconds[a]; //Keyframe is next.
             //glm::vec3 nVal = meshes[j].translations[a];
             glm::vec3 nVal;
+            nVal.x = meshes[j].vertices[i].pos.x + meshes[j].translations[a].x;
             nVal.y = meshes[j].vertices[i].pos.y + meshes[j].translations[a].y;
+            nVal.z = meshes[j].vertices[i].pos.z + meshes[j].translations[a].z;
+
+
+
             //std::cout << meshes[j].vertices[i].pos.y << " + " << meshes[j].translations[a].y << " = nVal.y." << std::endl;
            
         //std::cout << "pKey: " << pKey << std::endl; // " pVal.y: " << pVal.y << std::endl;
@@ -1352,13 +1359,13 @@ static auto sTime = std::chrono::high_resolution_clock::now();
 //Before hitting the first animation keyframe, it gets set to 0.
 //Lets preserve the original value first, then change it. (x and z should always be 0.2 here.)
 
-            //currentVertex.pos.x = ((percent * pVal.x) + ((1-percent) * nVal.x));
-            currentVertex.pos.x = meshes[j].vertices[i].pos.x;
+            currentVertex.pos.x = ((percent * pVal.x) + ((1-percent) * nVal.x));
+            //scurrentVertex.pos.x = meshes[j].vertices[i].pos.x;
             currentVertex.pos.y = ((percent * pVal.y) + ((1-percent) * nVal.y));
-            currentVertex.pos.z = meshes[j].vertices[i].pos.z;
-            //currentVertex.pos.z = ((percent * pVal.z) + ((1-percent) * nVal.z));
+            //currentVertex.pos.z = meshes[j].vertices[i].pos.z;
+            currentVertex.pos.z = ((percent * pVal.z) + ((1-percent) * nVal.z));
 
-      //std::cout << currentVertex.pos.x << " " << currentVertex.pos.y << " " << currentVertex.pos.z << " Percent: " << percent << std::endl;
+      std::cout << currentVertex.pos.x << " " << currentVertex.pos.y << " " << currentVertex.pos.z << " Percent: " << percent << std::endl;
           }
           vertices[i] = currentVertex;
         }
