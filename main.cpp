@@ -1365,7 +1365,7 @@ static auto sTime = std::chrono::high_resolution_clock::now();
             //currentVertex.pos.z = meshes[j].vertices[i].pos.z;
             currentVertex.pos.z = ((percent * pVal.z) + ((1-percent) * nVal.z));
 
-      std::cout << currentVertex.pos.x << " " << currentVertex.pos.y << " " << currentVertex.pos.z << " Percent: " << percent << std::endl;
+      //std::cout << currentVertex.pos.x << " " << currentVertex.pos.y << " " << currentVertex.pos.z << " Percent: " << percent << std::endl;
           }
           vertices[i] = currentVertex;
         }
